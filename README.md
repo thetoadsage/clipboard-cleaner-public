@@ -137,8 +137,8 @@ disk image contains the app and an **Applications** shortcut for drag-to-install
 in Finder. It is suitable for sharing directly with friends, but the app is
 only ad-hoc signed, so Gatekeeper will require them to right-click the app and
 choose **Open** the first time. Developer ID signing and notarization are
-needed for a warning-free public distribution. Public release downloads will be posted on the new repository after the
-release artifacts are reviewed.
+needed for a warning-free public distribution. The latest public build is
+[Clipboard Cleaner v1.0.1](https://github.com/thetoadsage/clipboard-cleaner-public/releases/tag/v1.0.1).
 
 On macOS 13 or later, use the menu's **Launch at Login** toggle. It is backed
 by Apple's `SMAppService`; macOS 12 users can still add the app manually in
