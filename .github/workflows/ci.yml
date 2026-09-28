@@ -1,0 +1,43 @@
+name: macOS CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-package:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run complete Swift test suite
+        run: swift test
+
+      - name: Compile release configuration
+        run: swift build -c release
+
+      - name: Validate updater Python and tests
+        env:
+          PYTHONPYCACHEPREFIX: .build/python-cache
+        run: |
+          python3 -m py_compile scripts/update_tracking_rules.py
+          python3 -m unittest discover -s Tests/UpdaterTests -v
+
+      - name: Build and verify app bundle
+        run: |
+          scripts/build_app.sh
+          codesign --verify --deep --strict --verbose=2 "build/Clipboard Cleaner.app"
+          test -f "build/Clipboard Cleaner.app/Contents/Resources/tracking-rules.json"
+          test -f "build/Clipboard Cleaner.app/Contents/Resources/AppIcon.icns"
+          plutil -lint "build/Clipboard Cleaner.app/Contents/Info.plist"
+
+      - name: Package archive and verify checksum
+        run: |
+          scripts/package_release.sh
+          cd dist
+          shasum -a 256 -c SHA256SUMS

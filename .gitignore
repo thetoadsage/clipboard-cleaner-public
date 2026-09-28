@@ -1,0 +1,24 @@
+.build/
+build/
+.swiftpm/
+*.xcodeproj
+.DS_Store
+
+# Generated app bundles and distribution archives -- build outputs, never source.
+*.app
+*.zip
+
+# SwiftPM
+Package.resolved
+
+# Common local-dev / IDE files
+.vscode/
+.idea/
+*.xcuserstate
+*.xcworkspace
+*.swp
+*~
+.env
+.env.*
+__pycache__/
+dist/
