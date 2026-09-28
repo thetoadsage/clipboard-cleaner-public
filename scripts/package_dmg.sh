@@ -25,7 +25,7 @@ rm -f "$DMG_PATH"
 
 # Create the standard Finder layout: the app plus an Applications shortcut.
 xattr -cr "$APP_PATH"
-ditto "$APP_PATH" "$STAGING_DIR/$APP_NAME.app"
+ditto --norsrc "$APP_PATH" "$STAGING_DIR/$APP_NAME.app"
 ln -s /Applications "$STAGING_DIR/Applications"
 
 hdiutil create \

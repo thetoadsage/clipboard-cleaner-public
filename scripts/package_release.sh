@@ -15,7 +15,7 @@ ARCHIVE="Clipboard-Cleaner-$VERSION.zip"
 mkdir -p "$DIST_DIR"
 rm -f "$DIST_DIR/$ARCHIVE" "$DIST_DIR/SHA256SUMS"
 xattr -cr "$APP_PATH"
-ditto -c -k --keepParent "$APP_PATH" "$DIST_DIR/$ARCHIVE"
+ditto --norsrc -c -k --keepParent "$APP_PATH" "$DIST_DIR/$ARCHIVE"
 # Some file-provider-backed workspaces reattach FinderInfo while `ditto`
 # reads the bundle. Keep the source bundle strict-verification clean too.
 xattr -cr "$APP_PATH"
